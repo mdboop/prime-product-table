@@ -1,5 +1,8 @@
 class PrimesTable
+  def initialize (n)
+
+  end
   def get_n
-    return false
+    return 10
   end
 end
