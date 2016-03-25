@@ -5,4 +5,9 @@ class PrimesTable
   def get_n
     return @n
   end
+
+  def get_primes
+    return false
+  end
+
 end
