@@ -11,6 +11,11 @@ class PrimesTable
   end
 
   def get_table(primes)
+
+    # This could be optimized to only iterate (n^2) / 2 times
+    # Since that does not affect its big O time complexity,
+    # I am opting for greater readability and a declarative style
+
     return primes.map { |row| primes.map {|col| row*col } }
   end
 
