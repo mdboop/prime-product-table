@@ -11,7 +11,7 @@ class PrimesTable
   end
 
   def get_table(primes)
-    return false
+    return primes.map { |row| primes.map {|col| row*col } }
   end
 
 end
