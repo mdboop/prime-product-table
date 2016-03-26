@@ -34,4 +34,8 @@ class PrimesTable
     return result
   end
 
+  def print_table
+    print "2"
+  end
+
 end
