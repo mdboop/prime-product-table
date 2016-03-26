@@ -34,12 +34,20 @@ class PrimesTable
 
     primes = get_primes()
     table = get_table(primes)
+    n = primes.length
+    # The longest number will always be in the bottom-rightmost cell
+    # Convert the value to a string and get the length for the max cell width
+    max = table[n - 1][n - 1].to_s.length
 
     result = ""
 
     primes.each do |prime|
-      result += prime.to_s
+      prime = prime.to_s
+      result += pad_left(prime, calc_pad(prime, max))
     end
+
+    result += "\n" + "=" * result.length + "\n"
+
     table.each do |row|
       row.each do |product|
         result += product.to_s
