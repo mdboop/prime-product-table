@@ -55,4 +55,10 @@ class TestPrimes < Minitest::Test
     assert_match %r%2%, out, "It should output to stdout"
   end
 
+  def test_primes_pad_left
+    primes_table = PrimesTable.new()
+    string = 55.to_s
+    padded_string = primes_table.pad_left(string, 4)
+    assert_equal 6, padded_string.length, "It should pad a string with the correct number of spaces"
+
 end
