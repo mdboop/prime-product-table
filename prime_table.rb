@@ -18,7 +18,7 @@ class PrimesTable
   # Note: This could be optimized to only iterate (n^2)/2 times
   # Since that does not affect its big O time complexity,
   # I am opting for greater readability and a declarative style
-
+  private
   def create_table(primes)
     return primes.map { |row| primes.map {|col| row*col } }
   end
@@ -37,6 +37,7 @@ class PrimesTable
 
   def get_primes
     n = get_n()
+    # 10,000 is a rough cutoff after which a sieve will likely be quicker
     if n < 10000
       return find_primes(n)
     else
