@@ -71,5 +71,11 @@ class PrimesTable
     return string + pad
   end
 
+  # ARG 1: string - String to calculate padding for (based on length)
+  # ARG 2: max - Integer representing the maximum cell width for current table
+  # Returns the difference between the max cell width and current string length
+  def calc_pad (string, max)
+    return max - string.length
+  end
 
 end
