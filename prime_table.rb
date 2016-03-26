@@ -20,7 +20,18 @@ class PrimesTable
   end
 
   def create_table_string
-    return ''
+    primes = get_primes()
+    table = get_table(primes)
+    result = ""
+    primes.each do |prime|
+      result += prime.to_s
+    end
+    table.each do |row|
+      row.each do |product|
+        result += product.to_s
+      end
+    end
+    return result
   end
 
 end
