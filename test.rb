@@ -12,15 +12,15 @@ class TestPrimes < Minitest::Test
   end
 
   def test_primes_get_primes
-    assert_equal [2,3,5,7,11,13,17,19,23,29], PrimesTable.new().send(:get_primes),
+    assert_equal [2,3,5,7,11,13,17,19,23,29], PrimesTable.new().send(:get_primes, 10),
     "get_primes should return the correct prime numbers"
-    assert_equal [2,3,5,7,11,13,17,19,23,29,31,37], PrimesTable.new(12).send(:get_primes),
+    assert_equal [2,3,5,7,11,13,17,19,23,29,31,37], PrimesTable.new(12).send(:get_primes, 12),
     "get_primes should return the correct prime numbers when passed different n"
   end
 
   def test_primes_create_table
     primes_table = PrimesTable.new()
-    primes = primes_table.send(:get_primes)
+    primes = primes_table.send(:get_primes, 10)
     table = primes_table.send(:create_table, primes)
 
     assert_instance_of Array, table, "It should return an array"
@@ -34,7 +34,7 @@ class TestPrimes < Minitest::Test
     primes_table = PrimesTable.new()
     primes = primes_table.send(:get_primes)
     table = primes_table.send(:create_table, primes)
-    table_string = primes_table.send(:create_table_string)
+    table_string = primes_table.send(:create_table_string, primes, table)
 
     assert_instance_of(String, table_string, "Creating the table should return a string")
     primes.each do |prime|
