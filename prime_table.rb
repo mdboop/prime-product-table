@@ -25,6 +25,15 @@ class PrimesTable
 
   #
   # Returns list of prime numbers
+  #
+  # This could be more optimized, but a decent and simple strategy
+  # here is to use a more brute-force method for smaller n values
+  # and for larger n values, we can optimize by using a sieve
+  # Sieves are great for finding primes within a range, but not for
+  # finding the first n primes. However, at a certain point,
+  # it is faster to generate all the primes within a range and then
+  # get the first n primes from that list
+  # This is the overall strategy adopted here
 
   def get_primes
     n = get_n()
