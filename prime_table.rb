@@ -74,7 +74,7 @@ class PrimesTable
 
   # Straightforward implementation of Sieve of Eratosthenes
 
-  def find_primes_with_sieve (limit=999999999)
+  def find_primes_with_sieve (n, limit=999999999)
 
     sieve = Array.new(limit, true)
     primes = []
@@ -89,7 +89,7 @@ class PrimesTable
     end
 
     index = 2
-    while primes.length < @n && index < sieve.length do
+    while primes.length < n && index < sieve.length do
       if sieve[index]
         primes.push(index)
       end

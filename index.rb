@@ -1,18 +1,30 @@
 require_relative "prime_table"
 
-# Simple command line interface which allows a single Integer as only argument
-#
-# Performs a nil check and catches ArgumentError if passed a value
-# that cannot be parsed to an integer
+# This runs a simple command line interface which allows a single Integer as only argument
 
-unless ARGV[0].nil?
+# ARG 1: Nil or String - possible Integer
+#
+# Helper function for handling arguments
+# Attempts to parse as integer
+# If ArgumentError is raised, print a message to stdout and return false
+# If TypeError is raised, nothing was passed, so just return false
+
+def can_parse_int? (n)
   begin
-    n = Integer(ARGV[0])
+    n = Integer(n)
     rescue ArgumentError
-      n = 10
-      puts 'Please pass in an integer, defaulting to 10'
-  end
-  PrimesTable.new(n).print_table()
+      print "\nCannot parse argument to an integer, default will run\n\n"
+      return false
+    rescue TypeError
+      return false
+    end
+    return true
+end
+
+if can_parse_int?(ARGV[0])
+  PrimesTable.new(Integer(ARGV[0])).print_table()
 else
   PrimesTable.new().print_table()
 end
+
+

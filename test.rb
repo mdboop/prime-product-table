@@ -70,7 +70,6 @@ class TestPrimes < Minitest::Test
     primes_table = PrimesTable.new()
     string = 55.to_s
     padded_string = primes_table.send(:pad_left, string, 4)
-    padded_string = primes_table.send(:pad_right, string, 4)
     assert_equal 6, padded_string.length, "pad_right should pad a string with the correct number of spaces"
     assert_equal padded_string[padded_string.length - 1], " ", "pad_right should return a string with at least one ending space"
   end
