@@ -44,7 +44,6 @@ class PrimesTable
     end
   end
 
-
   def is_prime(num)
     for i in 2..Math.sqrt(num)
       if i != num && num % i == 0
@@ -65,6 +64,34 @@ class PrimesTable
       i += 1
     end
     return primes
+  end
+
+  # Straightforward implementation of Sieve of Eratosthenes
+
+  def find_primes_with_sieve (limit=999999999)
+
+    sieve = Array.new(limit, true)
+    primes = []
+
+    for i in 2 .. Math.sqrt(limit)
+      if sieve[i]
+        range = i**2..limit
+        range.step(i) do | j |
+          sieve[j] = false
+        end
+      end
+    end
+
+    index = 2
+    while primes.length < @n && index < sieve.length do
+      if sieve[index]
+        primes.push(index)
+      end
+      index += 1
+    end
+
+    print primes
+
   end
 
   # Accepts no arguments
