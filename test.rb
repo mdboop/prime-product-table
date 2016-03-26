@@ -27,4 +27,10 @@ class TestPrimes < Minitest::Test
     assert_equal(2*29, table[0][9], "The array should contain the correct values")
   end
 
+  def test_primes_create_table_string
+    table_string = PrimesTable.new().create_table_string()
+    assert_instance_of(String, table_string, "Creating the table should return a string")
+  end
+
+
 end

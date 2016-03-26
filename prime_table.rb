@@ -19,4 +19,8 @@ class PrimesTable
     return primes.map { |row| primes.map {|col| row*col } }
   end
 
+  def create_table_string
+    return false
+  end
+
 end
