@@ -28,8 +28,22 @@ class TestPrimes < Minitest::Test
   end
 
   def test_primes_create_table_string
-    table_string = PrimesTable.new().create_table_string()
+    primes_table = PrimesTable.new()
+    primes = primes_table.get_primes()
+    table = primes_table.get_table(primes)
+    table_string = primes_table.create_table_string()
+
     assert_instance_of(String, table_string, "Creating the table should return a string")
+    primes.each do |prime|
+      assert((table_string.include? prime.to_s), "All of the primes should be found in the output string")
+    end
+
+    table.each do |row|
+      row.each do |primeProduct|
+        assert((table_string.include? primeProduct.to_s), "All of the prime products should be in the output string")
+      end
+    end
+
   end
 
 

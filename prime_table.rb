@@ -20,7 +20,7 @@ class PrimesTable
   end
 
   def create_table_string
-    return false
+    return ''
   end
 
 end
