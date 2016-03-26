@@ -16,10 +16,10 @@ class TestPrimes < Minitest::Test
     assert_equal [2,3,5,7,11,13,17,19,23,29,31,37], PrimesTable.new(12).get_primes(), "get_primes should return the correct prime numbers when passed different n"
   end
 
-  def test_primes_get_table
+  def test_primes_create_table
     primes_table = PrimesTable.new()
     primes = primes_table.get_primes()
-    table = primes_table.get_table(primes)
+    table = primes_table.create_table(primes)
 
     assert_instance_of Array, table, "It should return an array"
     assert_instance_of Array, table[0], "It should return a two-dimensional array"
@@ -31,7 +31,7 @@ class TestPrimes < Minitest::Test
   def test_primes_create_table_string
     primes_table = PrimesTable.new()
     primes = primes_table.get_primes()
-    table = primes_table.get_table(primes)
+    table = primes_table.create_table(primes)
     table_string = primes_table.create_table_string()
 
     assert_instance_of(String, table_string, "Creating the table should return a string")

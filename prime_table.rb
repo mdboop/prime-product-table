@@ -6,11 +6,10 @@ class PrimesTable
     return @n
   end
 
-  #
-  # Returns list of prime numbers
-
-  def get_primes
-    return [2,3,5,7,11,13,17,19,23,29]
+  # Accepts no arguments
+  # Calls create_table_string and outputs it to stdout
+  def print_table
+    print create_table_string()
   end
 
   # ARG 1: primes - Array of prime numbers
@@ -20,8 +19,43 @@ class PrimesTable
   # Since that does not affect its big O time complexity,
   # I am opting for greater readability and a declarative style
 
-  def get_table(primes)
+  def create_table(primes)
     return primes.map { |row| primes.map {|col| row*col } }
+  end
+
+  #
+  # Returns list of prime numbers
+
+  def get_primes
+    n = get_n()
+    if n < 10000
+      return find_primes(n)
+    else
+      return find_primes_with_sieve(n)
+    end
+  end
+
+
+  def is_prime(num)
+    for i in 2..Math.sqrt(num)
+      if i != num && num % i == 0
+        return false
+      end
+    end
+    return true
+  end
+
+  def find_primes (n)
+    primes = []
+
+    i = 2
+    while primes.length < n
+      if is_prime(i)
+        primes.push(i)
+      end
+      i += 1
+    end
+    return primes
   end
 
   # Accepts no arguments
@@ -33,7 +67,7 @@ class PrimesTable
   def create_table_string
 
     primes = get_primes()
-    table = get_table(primes)
+    table = create_table(primes)
     n = primes.length
     # The longest number will always be in the bottom-rightmost cell
     # Convert the value to a string and get the length +1 for the fixed cell width
@@ -68,13 +102,6 @@ class PrimesTable
 
     return result
   end
-
-  # Accepts no arguments
-  # Calls create_table_string and outputs it to stdout
-  def print_table
-    print create_table_string()
-  end
-
 
   # ARG 1: string - String to be padded
   # ARG 2: num - number of
