@@ -12,7 +12,8 @@ class TestPrimes < Minitest::Test
   end
 
   def test_primes_get_primes
-    assert_equal [2,3,5,7,11,13,17,19,23,29], PrimesTable.new().get_primes(), "It should return the correct prime numbers"
+    assert_equal [2,3,5,7,11,13,17,19,23,29], PrimesTable.new().get_primes(), "get_primes should return the correct prime numbers"
+    assert_equal [2,3,5,7,11,13,17,19,23,29,31,37], PrimesTable.new(12).get_primes(), "get_primes should return the correct prime numbers when passed different n"
   end
 
   def test_primes_get_table
