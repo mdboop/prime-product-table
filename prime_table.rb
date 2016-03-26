@@ -8,6 +8,7 @@ class PrimesTable
 
   # Accepts no arguments
   # Calls create_table_string and outputs it to stdout
+  # For now, this is the only public method
   def print_table
     print create_table_string()
   end
