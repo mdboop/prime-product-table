@@ -36,23 +36,36 @@ class PrimesTable
     table = get_table(primes)
     n = primes.length
     # The longest number will always be in the bottom-rightmost cell
-    # Convert the value to a string and get the length for the max cell width
-    max = table[n - 1][n - 1].to_s.length
+    # Convert the value to a string and get the length +1 for the fixed cell width
+    cell_width = table[n - 1][n - 1].to_s.length + 1
 
-    result = ""
+    result = " " * cell_width + "  "
 
+    # Add column headers (each prime number) with correct padding
     primes.each do |prime|
       prime = prime.to_s
-      result += pad_left(prime, calc_pad(prime, max))
+      result += pad_left(prime, calc_pad(prime, cell_width))
     end
 
+    # After column headers, add a divider of '=' characters to span entire length
     result += "\n" + "=" * result.length + "\n"
 
-    table.each do |row|
-      row.each do |product|
-        result += product.to_s
+
+    table.each_with_index do |row, i|
+      # For each row, use the index to add the row header with correct padding plus a '||' divider
+      row_head = primes[i]
+      pad_length = calc_pad(row_head.to_s, cell_width)
+      result += pad_left(row_head.to_s, pad_length) + "||"
+
+      row.each do |cell|
+        # For each cell, pad correctly and add to result
+        pad_length = calc_pad(cell.to_s, cell_width)
+        result += pad_left(cell.to_s, pad_length)
       end
+
+      result += "\n"
     end
+
     return result
   end
 
