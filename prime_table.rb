@@ -31,9 +31,12 @@ class PrimesTable
   # formatted string with correct padding
 
   def create_table_string
+
     primes = get_primes()
     table = get_table(primes)
+
     result = ""
+
     primes.each do |prime|
       result += prime.to_s
     end
@@ -54,10 +57,19 @@ class PrimesTable
 
   # ARG 1: string - String to be padded
   # ARG 2: num - number of
-  # To keep things simple, we will only pad with ' ' chars,
-
+  # To keep things simple, we will only pad with ' ' chars
   def pad_left (string, num)
-    return ''
+    pad = " " * num
+    return pad + string
   end
+
+  # ARG 1: string - String to be padded
+  # ARG 2: num - number of
+  # To keep things simple, we will only pad with ' ' chars
+  def pad_right (string, num)
+    pad = " " * num
+    return string + pad
+  end
+
 
 end

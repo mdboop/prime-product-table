@@ -60,6 +60,18 @@ class TestPrimes < Minitest::Test
     string = 55.to_s
     padded_string = primes_table.pad_left(string, 4)
     assert_equal 6, padded_string.length, "It should pad a string with the correct number of spaces"
+    assert_equal padded_string[0], " ", "At least first character should be a space"
   end
+
+  def test_primes_pad_right
+    primes_table = PrimesTable.new()
+    string = 55.to_s
+    padded_string = primes_table.pad_left(string, 4)
+    padded_string = primes_table.pad_right(string, 4)
+    assert_equal 6, padded_string.length, "It should pad a string with the correct number of spaces"
+    assert_equal padded_string[padded_string.length - 1], " ", "At least last character should be a space"
+  end
+
+
 
 end
