@@ -59,8 +59,8 @@ class TestPrimes < Minitest::Test
     primes_table = PrimesTable.new()
     string = 55.to_s
     padded_string = primes_table.pad_left(string, 4)
-    assert_equal 6, padded_string.length, "It should pad a string with the correct number of spaces"
-    assert_equal padded_string[0], " ", "At least first character should be a space"
+    assert_equal 6, padded_string.length, "pad_left should pad a string with the correct number of spaces"
+    assert_equal padded_string[0], " ", "pad_left should return a string with at least one starting space"
   end
 
   def test_primes_pad_right
@@ -68,10 +68,16 @@ class TestPrimes < Minitest::Test
     string = 55.to_s
     padded_string = primes_table.pad_left(string, 4)
     padded_string = primes_table.pad_right(string, 4)
-    assert_equal 6, padded_string.length, "It should pad a string with the correct number of spaces"
-    assert_equal padded_string[padded_string.length - 1], " ", "At least last character should be a space"
+    assert_equal 6, padded_string.length, "pad_right should pad a string with the correct number of spaces"
+    assert_equal padded_string[padded_string.length - 1], " ", "pad_right should return a string with at least one ending space"
   end
 
+  def test_primes_calc_pad
+    primes_table = PrimesTable.new()
+    string = 55.to_s
+    max = 3
+    assert_equal 1, primes_table.calc_pad(string, max), "calc_pad should return the difference of the max cell width and length of the current string"
+  end
 
 
 end
