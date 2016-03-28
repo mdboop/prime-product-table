@@ -4,11 +4,11 @@ class PrimesTable
     @n = n
   end
 
-  # Accepts no arguments
+  # ARG 1: n - Integer number of primes to use in table, defaults to initialized value if not passed
   # Calls create_table_string and outputs it to stdout
   # For now, this is the only public method
-  def print_table
-    primes = get_primes(get_n())
+  def print_table (n=@n)
+    primes = get_primes(n)
     print create_table_string(primes, create_table(primes))
   end
 

@@ -18,7 +18,7 @@ Print a multiplication table of prime numbers
 ## Notes
 
 ### Design & Approach
-This class exposes one public method, `print_table`, which accepts no arguments.
+This class exposes one public method, `print_table`, which defaults to the initialized n value if nothing is passed in.
 
 Additionally, given the scope and purpose of this exercise, I decided to encapsulate all logic
 inside a single class. A likely refactor would be to pull out the prime calculation into its own class, since it would only be responsible for calculating primes, and the PrimesTable class would only be responsible for creating and printing the table.
