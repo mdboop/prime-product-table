@@ -52,7 +52,7 @@ class PrimesTable
 
   def is_prime(num)
     for i in 2..Math.sqrt(num)
-      if i != num && num % i == 0
+      if num % i == 0
         return false
       end
     end
@@ -60,21 +60,25 @@ class PrimesTable
   end
 
   def find_primes (n)
-    primes = []
+    primes = [2]
 
-    i = 2
+    i = 3
     while primes.length < n
       if is_prime(i)
         primes.push(i)
       end
-      i += 1
+      i += 2
     end
     return primes
   end
 
-  # Straightforward implementation of Sieve of Eratosthenes
+  # ARG 1: n - Integer for number of primes to find
+  # ARG 2: limit - Integer range in which to search for primes
+  # Straightforward implementation of Sieve of Eratosthenes,
+  # with added logic for finding the first n primes within
+  # the list we generate
 
-  def find_primes_with_sieve (n, limit=999999999)
+  def find_primes_with_sieve (n, limit=10000000)
 
     sieve = Array.new(limit, true)
     primes = []
@@ -114,34 +118,42 @@ class PrimesTable
     # Convert the value to a string and get the length +1 for the fixed cell width
     cell_width = table[n - 1][n - 1].to_s.length + 1
 
-    table_string = " " * cell_width + "  "
-
-    # Add column headers (each prime number) with correct padding
-    primes.each do |prime|
-      prime = prime.to_s
-      table_string += pad_left(prime, calc_pad(prime, cell_width))
-    end
-
-    # After column headers, add a divider of '=' characters to span entire length
-    table_string += "\n" + "=" * table_string.length + "\n"
-
+    table_string = create_column_headers(primes, cell_width)
+    table_string += create_column_divider(table_string.length)
 
     table.each_with_index do |row, i|
-      # For each row, use the index to add the row header with correct padding plus a '||' divider
-      row_head = primes[i]
-      pad_length = calc_pad(row_head.to_s, cell_width)
-      table_string += pad_left(row_head.to_s, pad_length) + "||"
-
-      row.each do |cell|
+      table_string += create_row_header(primes[i], cell_width)
+      row.each do |prime_product|
         # For each cell, pad correctly and add to table_string
-        pad_length = calc_pad(cell.to_s, cell_width)
-        table_string += pad_left(cell.to_s, pad_length)
+        table_string += create_cell(prime_product, cell_width)
       end
-
       table_string += "\n"
     end
 
     return table_string
+  end
+
+  def create_cell (prime_product, cell_width)
+    pad_length = calc_pad(prime_product.to_s, cell_width)
+    return pad_left(prime_product.to_s, pad_length)
+  end
+
+  def create_row_header (row_head, cell_width)
+    pad_length = calc_pad(row_head.to_s, cell_width)
+    return pad_left(row_head.to_s, pad_length) + "||"
+  end
+
+  def create_column_headers (primes, cell_width)
+    table_string = " " * cell_width + "  "
+    primes.each do |prime|
+      prime = prime.to_s
+      table_string += pad_left(prime, calc_pad(prime, cell_width))
+    end
+    return table_string
+  end
+
+  def create_column_divider (length)
+    "\n" + "=" * length + "\n"
   end
 
   # ARG 1: string - String to be padded

@@ -1,5 +1,6 @@
 require_relative "prime_table"
 require "minitest/autorun"
+require "prime"
 
 class TestPrimes < Minitest::Test
 
@@ -12,17 +13,23 @@ class TestPrimes < Minitest::Test
   end
 
   def test_primes_get_primes
-    assert_equal [2,3,5,7,11,13,17,19,23,29], PrimesTable.new().send(:get_primes, 10),
-    "get_primes should return the correct prime numbers"
-    assert_equal [2,3,5,7,11,13,17,19,23,29,31,37], PrimesTable.new(12).send(:get_primes, 12),
-    "get_primes should return the correct prime numbers when passed different n"
+    small_primes = PrimesTable.new().send(:get_primes, 10)
+    med_primes = PrimesTable.new().send(:get_primes, 1000)
+    assert_equal Prime.take(10), small_primes, "get_primes should return the correct prime numbers"
+    assert_equal Prime.take(1000), med_primes, "get_primes should return the correct prime numbers when passed different n"
   end
+
+  def test_primes_get_primes_big_n
+    table = PrimesTable.new()
+    big_primes = PrimesTable.new().send(:get_primes, 20000)
+    assert_equal Prime.take(20000), big_primes, "get_primes should return the correct prime numbers for large n values"
+  end
+
 
   def test_primes_create_table
     primes_table = PrimesTable.new()
     primes = primes_table.send(:get_primes, 10)
     table = primes_table.send(:create_table, primes)
-
     assert_instance_of Array, table, "It should return an array"
     assert_instance_of Array, table[0], "It should return a two-dimensional array"
     assert_instance_of Array, table[table.length - 1], "It should return a two-dimensional array NxN"
@@ -32,7 +39,7 @@ class TestPrimes < Minitest::Test
 
   def test_primes_create_table_string
     primes_table = PrimesTable.new()
-    primes = primes_table.send(:get_primes)
+    primes = primes_table.send(:get_primes, 10)
     table = primes_table.send(:create_table, primes)
     table_string = primes_table.send(:create_table_string, primes, table)
 
@@ -50,11 +57,9 @@ class TestPrimes < Minitest::Test
   end
 
   def test_primes_print_table
-
     out, err = capture_subprocess_io do
       PrimesTable.new().print_table()
     end
-
     assert_match %r%2%, out, "It should output to stdout"
   end
 
@@ -69,7 +74,7 @@ class TestPrimes < Minitest::Test
   def test_primes_pad_right
     primes_table = PrimesTable.new()
     string = 55.to_s
-    padded_string = primes_table.send(:pad_left, string, 4)
+    padded_string = primes_table.send(:pad_right, string, 4)
     assert_equal 6, padded_string.length, "pad_right should pad a string with the correct number of spaces"
     assert_equal padded_string[padded_string.length - 1], " ", "pad_right should return a string with at least one ending space"
   end
