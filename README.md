@@ -7,7 +7,7 @@ Print a multiplication table of prime numbers
 ### Installation & Use
 
 1. In your terminal, run `git clone https://github.com/mdboop/prime-product-table.git && cd prime-product-table`
-2. In the root directory, run `ruby prime_table.rb <n>` where `n` is the number of primes to be used in creating the table
+2. In the root directory, run `ruby index.rb <n>` where `n` is the number of primes to be used in creating the table
 
 **note:** If no argument is passed, it will default to 10. Additionally, it may not print well above 30, depending on screen resolution/size
 
